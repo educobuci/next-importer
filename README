@@ -1,8 +1,8 @@
-= Installation -- Setting up the environment
+# Installation -- Setting up the environment
 
 This guide is made for linux or unix so we officialy don't support this importer on windows
 
-== Installing the Nero AAC encoder:
+## Installing the Nero AAC encoder:
 
 * 1) Download the files from the Nero website, and unpack them into the /usr/bin/nero_aac 
 
