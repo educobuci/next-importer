@@ -7,19 +7,10 @@ module Settings
   @_settings = {}
   attr_reader :_settings
 
-  # This is the main point of entry - we call Settings.load! and provide
-  # a name of the file to read as it's argument. We can also pass in some
-  # options, but at the moment it's being used to allow per-environment
-  # overrides in Rails
-  def load!(filename)
-    YAML::ENGINE.yamler= 'syck'
-    @_settings = YAML::load_file(filename)
-  end
-
   def get(name, default_value = nil)
     
     if (@_settings.empty?)
-      self.load! File.expand_path(File.dirname(__FILE__)) + '/../config/main.yml'
+      load! File.expand_path(File.dirname(__FILE__)) + '/../config/main.yml'
     end
     
     cnf = @_settings
@@ -28,6 +19,12 @@ module Settings
     end
      
     cnf || default_value
+  end
+
+  private
+  def load!(filename)
+    #YAML::ENGINE.yamler= 'syck'
+    @_settings = YAML::load_file(filename)
   end
 
 end
