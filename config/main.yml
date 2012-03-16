@@ -1,0 +1,6 @@
+log:
+  level: DEBUG
+  shift_age: 0
+  logdev: STDOUT 
+  shift_size: 1048576
+  datetime_format: \%Y-%m-%d %H:%M:%S
