@@ -4,3 +4,30 @@ log:
   logdev: STDOUT 
   shift_size: 1048576
   datetime_format: \%Y-%m-%d %H:%M:%S
+
+media_destination:
+  type: disk
+  path: /var/www/tesfiles_destination
+  stage_path: /var/www/tesfiles_stage
+
+jobs:
+  - songs_from_disk:
+      media_type: audio
+      medias:
+        - high:
+            type: AAC_LC
+            bit_rate: 128
+            extension: m4a
+        - medium:
+            type: AAC_HE
+            bit_rate: 96
+            extension: m4a
+        - low:
+            type: AAC_HEv2
+            bit_rate: 64
+            extension: m4a
+      from:
+        - disk:
+            path: /media/Data/Projects/nextplatform/testfiles/Media Sample
+            filter: ^(.*).m4a$
+
