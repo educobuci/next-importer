@@ -21,7 +21,7 @@ class Audio
   
   def generate(file)
     basename = File.basename(file, File.extname(file)).gsub(/[\W]/, '')
-    to = "#{Settings.get('media_destination.stage_path')}/#{basename}.#{@name}.#{@type}.#{@bit_rate}.#{@extension}"
+    to = "#{Settings.get('media_destination.stage_path')}/#{basename}.#{@name}.#{@type}.#{@bit_rate}.#{SecureRandom.uuid.gsub('-', '')}.#{@extension}"
     Log.info(" >>> Creating media[#{@name}|#{@type}|#{@bit_rate}|#{@extension}]")
     @parser.generate(file, to)
     return to

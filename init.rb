@@ -9,7 +9,8 @@ end
 require 'importer'
 
 if __FILE__ == $0
-  
+
+  # initialize the importer
   importer = Importer.new(ARGV)
   importer.run
 

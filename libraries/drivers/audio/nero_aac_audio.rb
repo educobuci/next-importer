@@ -8,18 +8,30 @@ class NeroAACAudio
   end
 
   def generate(from, to)
-    p Next::Libs::FileInfo::get_info(from)
-    #encode(from, to)
+    
+    info = Next::Libs::FileInfo::get_info(from)
+    
+    if info.mime != 'audio/wav'
+      to_tmp = Settings.get('media_destination.stage_path') + "/" + File.basename(to, File.extname(to)) + '.wav'
+      decode(from, to_tmp)
+      from = to_tmp 
+    end
+    
+    encode(from, to)
+    File.delete(to_tmp) unless to_tmp.nil?
+    
   end
   
-  private
+  private 
   def encode(from, to)
-     res = system("neroaacenc -br #{@bit_rate} -if '#{from}' -of '#{to}'")
+     Log.info(" >>>>> Encoding from #{from} to #{to}")
+     res = system("neroaacenc -br #{@bit_rate} -if \"#{from.gsub('"', '\\"')}\" -of \"#{to.gsub("'", "\\'")}\"")
      raise Exception.new($0) if !res
   end
 
   def decode(from, to)
-     res = system("neroaacdec -if '#{from}' -of '#{to}'")
+     Log.info(" >>>>> Decoding from #{from} to #{to}")
+     res = system("neroaacdec -if \"#{from.gsub('"', '\\"')}\" -of \"#{to.gsub("'", "\\'")}\"")
      raise Exception.new($0) if !res
   end
   

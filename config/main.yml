@@ -6,9 +6,9 @@ log:
   datetime_format: \%Y-%m-%d %H:%M:%S
 
 media_destination:
+  stage_path: /var/www/testfiles_stage
   type: disk
-  path: /var/www/tesfiles_destination
-  stage_path: /var/www/tesfiles_stage
+  path: /var/www/testfiles_destination
 
 jobs:
   - songs_from_disk:

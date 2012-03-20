@@ -1,0 +1,5 @@
+production:
+   adapter: sqlite3
+   database: nextplatform_importer
+   pool: 5
+   timeout: 5000

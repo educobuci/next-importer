@@ -29,6 +29,11 @@ module Log
     @@log.fatal(msg)
   end
   
+  def self.get_logger
+    self.set_logger
+    @@log
+  end
+  
   private 
   def self.set_logger
     if @@log.nil?

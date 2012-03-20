@@ -1,5 +1,3 @@
-require 'yaml'
-
 module Settings
   # again - it's a singleton, thus implemented as a self-extended module
   extend self
