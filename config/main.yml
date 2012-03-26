@@ -5,10 +5,15 @@ log:
   shift_size: 1048576
   datetime_format: \%Y-%m-%d %H:%M:%S
 
+db: production
+
 media_destination:
   stage_path: /var/www/testfiles_stage
   type: disk
   path: /var/www/testfiles_destination
+
+media_kernel:
+  base_url: http://localhost:3000/
 
 jobs:
   - songs_from_disk:
