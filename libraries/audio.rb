@@ -32,12 +32,12 @@ class Audio
     to = "#{Settings.get('media_destination.stage_path')}/#{basename}.#{@name}.#{@type}.#{@bit_rate}.#{SecureRandom.uuid.gsub('-', '')}.#{@extension}"
     Log.info("Creating media[#{@name}|#{@type}|#{@bit_rate}|#{@extension}]")
     @parser.generate(file, to)
-    save_metadata(file)
+    save_metadata(file, File.basename(to))
     return to
   end
   
   private
-  def save_metadata(file)
+  def save_metadata(file, file_name)
     # get file metadata
     meta = FileInfo.get_info(file)
     meta.meta_data['genre'] = 'Rock nroll' #faking genre, later on I'll see how to bring the genre from the file metadata
@@ -47,7 +47,7 @@ class Audio
     album = save_album(meta.meta_data['album'])
     genre = save_genre(meta.meta_data['genre'])
     song = save_song(artist, album, genre, meta.meta_data['title'], meta.meta_data['tracknum'])
-    media_id = save_media(song, @name, @type, meta.size, meta.meta_data['length'], meta.meta_data['bitrate'])
+    media_id = save_media(song, file_name, @name, meta.size, meta.meta_data['length'], meta.meta_data['bitrate'])
     
     return media_id
   end
