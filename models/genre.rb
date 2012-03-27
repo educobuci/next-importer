@@ -1,5 +1,4 @@
-require 'active_resource'
+require 'resource_model'
 
-class Genre < ActiveResource::Base
-  self.site = Settings.get('media_kernel.base_url')
+class Genre < ResourceModel
 end

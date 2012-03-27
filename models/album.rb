@@ -1,5 +1,4 @@
-require 'active_resource'
+require 'resource_model'
 
-class Album < ActiveResource::Base
-  self.site = Settings.get('media_kernel.base_url')
+class Album < ResourceModel
 end

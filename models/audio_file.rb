@@ -1,5 +1,4 @@
-require 'active_resource'
+require 'resource_model'
 
-class AudioFile < ActiveResource::Base
-  self.site = Settings.get('media_kernel.base_url')
+class AudioFile < ResourceModel
 end

@@ -61,7 +61,6 @@ class Importer
           
           Log.info("Processing #{file}")
           generated_files = []
-          media_processor = nil
           
           begin
 
@@ -90,10 +89,7 @@ class Importer
                 
               end
             end
-            
-            # insert metadata in the database
-            media_processor.register_metadata(file) unless media_processor.nil?
-            
+                        
           rescue Exception => e
             Log.error(e.message)
             generated_files.each do |filepath|
