@@ -47,9 +47,9 @@ class Audio
     album = save_album(meta.meta_data['album'])
     genre = save_genre(meta.meta_data['genre'])
     song = save_song(artist, album, genre, meta.meta_data['title'], meta.meta_data['tracknum'])
-    #media_id = save_media(song_id, meta.type, meta.size, meta.meta_data['length'], meta.meta_data['bitrate'])
+    media_id = save_media(song, @name, @type, meta.size, meta.meta_data['length'], meta.meta_data['bitrate'])
     
-    #return media_id
+    return media_id
   end
   
   def save_artist(name)
@@ -113,7 +113,17 @@ class Audio
     end
   end
 
-  def save_media(song_id, type, size, duration, bitrate)
+  def save_media(song, name, type, size, duration, bitrate)
+    begin
+      audio_file = AudioFile.new(:name => name, :type => type, :size => size, :duration => duration, :bitrate => bitrate)
+      audio_file.save
+      song.add_related(audio_file)
+      Log.info("New audio file created: #{audio_file.id} - #{song.title}|#{name}|#{type}|#{bitrate}")
+      return audio_file
+    rescue Exception => e
+      Log.info("Error saving audio file #{song.title}|#{name}|#{type}|#{bitrate}. Error: #{e.message}")
+      raise e
+    end
   end
   
 end
